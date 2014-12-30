@@ -4,7 +4,7 @@ File streaming library (via generators), for line by line readers and CSV parsin
 
 ## Install
 
-Available as a composer package named `mhitza/file-enumerators`, *requires* PHP `>=5.5.0`
+Available as a composer package named `mhitza/file-enumerators`, **requires** PHP `>=5.5.0`
 
 ## Example usage
 
@@ -26,9 +26,44 @@ foreach($enumerator->enumerate() as $line) {
 
 ### CSV reader
 
-Consider a CSV file that has 5 columns, yet we are only interested in the *first*, *third* and *fifth* column. Also
-we want to have semantically adequate keys for those columns instead of numbers. And maybe our *fifth* has a set of
+Consider a CSV file that has 5 columns, yet we are only interested in the **first**, **third** and **fifth** column. Also
+we want to have semantically adequate keys for those columns instead of numbers. And maybe our **fifth** has a set of
 numbers separated by a dash, that we want to sum up.
+
+```php
+<?php
+
+use FileEnumerators\Reader\CSV as CSVReader;
+use FileEnumerators\Reader\Transformer\CSV as CSVTransformer;
+
+$transformer = new CSVTransformer();
+$transformer->onlyColumns(1,3,5)
+            ->columnsToNames([
+              1 => "title",
+              2 => "something-relevant",
+              5 => "user-ratings"
+            ])
+            ->mapColumn(5, function($value){
+              return array_sum(array_map(str_split('-', $value), 'intval'));
+            });
+  
+$reader = new CSVReader(
+  CSVReader::COMMA_DELIMITED,
+  $transformer
+);
+
+$enumerator = new FileEnumerators\Enumerator('datafile.csv', $transformer);
+
+foreach($enumerator->enumerate() as $row) {
+  printf("%s %s %d",
+    $row['title'],
+    $row['something-relevant'],
+    $row['user-ratings']
+  );
+}
+```
+
+Or the personally prefered variant where everything is bundled up in a single builder set.
 
 ```php
 <?php
@@ -52,4 +87,12 @@ $enumerator = new FileEnumerators\Enumerator(
       })
   )
 );
+
+foreach($enumerator->enumerate() as $row) {
+  printf("%s %s %d",
+    $row['title'],
+    $row['something-relevant'],
+    $row['user-ratings']
+  );
+}
 ```
