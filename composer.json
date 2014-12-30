@@ -1,0 +1,9 @@
+{
+  "name": "mhitza/file-enumerators",
+  "php": ">=5.5.0",
+  "autoload": {
+    "psr-4": {
+      "FileEnumerators\\": "lib/"
+    }
+  }
+}
