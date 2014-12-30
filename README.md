@@ -1,6 +1,6 @@
 # File Enumerators
 
-File streaming library (via generators), for line by line readers and CSV parsing (XML may come at some point too).
+File streaming library (via generators), for line by line readers and CSV parsing (other specializations may come up at some point).
 
 ## Install
 
