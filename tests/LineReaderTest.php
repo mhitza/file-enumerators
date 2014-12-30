@@ -3,9 +3,10 @@
 use FileEnumerators\Enumerator as Enumerator;
 use FileEnumerators\Reader\Line as LineReader;
 
-define('SAMPLE_FILEPATH', __DIR__.'/data/line_sample.txt');
 
 class LineReaderTest extends PHPUnit_Framework_TestCase {
+  
+  const SAMPLE_FILEPATH = __DIR__.'/data/line_sample.txt';
   
   public function testAgainstFileGetContents() {
     $enumerator = new Enumerator(SAMPLE_FILEPATH, new LineReader);
