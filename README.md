@@ -24,7 +24,24 @@ foreach($enumerator->enumerate() as $line) {
 }
 ```
 
-### CSV reader
+### CSV reader - simple
+
+```php
+<?php
+
+use FileEnumerators\Reader\CSV as CSVReader;
+
+$enumerator = new FileEnumerators\Enumerator('datafile.csv', new CSVReader);
+
+foreach($enumerator->enumerate() as $row) {
+  echo "ROW\n";
+  foreach($row as $column) {
+    echo "\t$column";
+  }
+}
+```
+
+### CSV reader - more complex
 
 Consider a CSV file that has 5 columns, yet we are only interested in the **first**, **third** and **fifth** column. Also
 we want to have semantically adequate keys for those columns instead of numbers. And maybe our **fifth** has a set of
