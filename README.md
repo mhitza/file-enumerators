@@ -2,6 +2,11 @@
 
 File streaming library (via generators), for line by line readers and CSV parsing (other specializations may come up at some point).
 
+It's important to remember that **generators are forward-only iterators**. For that you should take note that in the example
+code I'm calling `enumerate()` inside the `foreach` construct instead of assigning it to a variable, and iterating over that
+variable. That is the safe way of iterating over a generator, since `enumerate()` is the `Generator` builder, UNLESS you want
+to constrain single passes over the streams, in which case binding the generator to a variable is prefered.
+
 ## Install
 
 Available as a [composer package](https://packagist.org/packages/mhitza/file-enumerators), **requires** PHP `>=5.5.0`
