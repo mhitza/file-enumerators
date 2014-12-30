@@ -5,7 +5,7 @@ namespace FileEnumerators\Reader;
 class Line implements ReaderInterface {
   
   public function open($filepath) {
-    return fopen($filepath);
+    return fopen($filepath, 'r');
   }
   
   public function close($handle) {
