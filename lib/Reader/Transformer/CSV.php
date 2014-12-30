@@ -80,7 +80,7 @@ class CSV {
       // one of those guys, for whom indexes should start at 1
       $offset_id = $id + 1;
       
-      if($has_columns_filter && !isset($this->only_columns[$offset_id])) {
+      if($has_columns_filter && !in_array($offset_id, $this->only_columns)) {
         continue;
       }
       

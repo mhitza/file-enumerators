@@ -19,7 +19,7 @@ class CSV implements ReaderInterface {
    * @param string $delimiter Field delimiter (ONE CHARACTER ONLY) OR use CSV::TAB_DELIMITED / CSV::COMMAN_DELIMITED
    * @param FileEnumerators\Reader\Transformer\CSV
    */
-  public function __construct($delimiter = CSV::COMMA_DELIMITED, Transformer\CSV $transformer) {
+  public function __construct($delimiter = CSV::COMMA_DELIMITED, Transformer\CSV $transformer = null) {
     $this->delimiter = $delimiter;
     $this->transformer = $transformer;
   }
