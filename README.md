@@ -4,7 +4,11 @@ File streaming library (via generators), for line by line readers and CSV parsin
 
 ## Install
 
-Available as a composer package named `mhitza/file-enumerators`, **requires** PHP `>=5.5.0`
+Available as a [composer package](https://packagist.org/packages/mhitza/file-enumerators), **requires** PHP `>=5.5.0`
+
+```shell
+$ composer.phar require mhitza/file-enumerators
+```
 
 ## Example usage
 
