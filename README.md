@@ -40,7 +40,7 @@ $transformer = new CSVTransformer();
 $transformer->onlyColumns(1,3,5)
             ->columnsToNames([
               1 => "title",
-              2 => "something-relevant",
+              3 => "something-relevant",
               5 => "user-ratings"
             ])
             ->mapColumn(5, function($value){
@@ -79,7 +79,7 @@ $enumerator = new FileEnumerators\Enumerator(
       ->onlyColumns(1,3,5)
       ->columnsToNames([
         1 => "Title",
-        2 => "Something relevant",
+        3 => "Something relevant",
         5 => "User ratings"
       ])
       ->mapColumn(5, function($value){
