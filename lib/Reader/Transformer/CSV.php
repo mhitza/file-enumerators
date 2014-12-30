@@ -11,7 +11,7 @@ class CSV {
   
   /**
    * Comma separated numbers for columns to return, e.g.:
-   *   (new CSV)->onlyColumns(1,3,5)
+   *   (new CSV)->onlyColumns(0,2,4)
    *
    * @return FileEnumerators\Reader\Transformer\CSV
    */
@@ -24,9 +24,9 @@ class CSV {
   /**
    * e.g.:
    *   (new CSV)->columnsToNames([
-   *     1 => "Title",
-   *     3 => "Score",
-   *     5 => "Average"
+   *     0 => "Title",
+   *     2 => "Score",
+   *     4 => "Average"
    *   ])
    *
    * @param array $mapping Key => Value maps a given column ID to a column NAME
@@ -44,10 +44,10 @@ class CSV {
    *      transformation can be defined
    *
    * e.g.:
-   *   (new CSV)->mapColumn(1, 'trim')
+   *   (new CSV)->mapColumn(0, 'trim')
    *
    *   OR custom callback
-   *   (new CSV)->mapColumn(3, function($value){
+   *   (new CSV)->mapColumn(2, function($value){
    *     return preg_split(",", $value);
    *   })
    *
@@ -77,19 +77,16 @@ class CSV {
     $has_column_names = !empty($this->columns_to_names);
     
     foreach($row as $id => $value) {
-      // one of those guys, for whom indexes should start at 1
-      $offset_id = $id + 1;
-      
-      if($has_columns_filter && !in_array($offset_id, $this->only_columns)) {
+      if($has_columns_filter && !in_array($id, $this->only_columns)) {
         continue;
       }
       
-      $key = $has_column_names && isset($this->columns_to_names[$offset_id]) ?
-        $this->columns_to_names[$offset_id] :
-        $offset_id;
+      $key = $has_column_names && isset($this->columns_to_names[$id]) ?
+        $this->columns_to_names[$id] :
+        $id;
         
-      $resultant[$key] = $has_column_mappings && isset($this->column_maps[$offset_id]) ?
-        $this->column_maps[$offset_id]($value) :
+      $resultant[$key] = $has_column_mappings && isset($this->column_maps[$id]) ?
+        $this->column_maps[$id]($value) :
         $value;
     }
     

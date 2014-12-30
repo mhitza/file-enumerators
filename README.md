@@ -58,13 +58,13 @@ use FileEnumerators\Reader\CSV as CSVReader;
 use FileEnumerators\Reader\Transformer\CSV as CSVTransformer;
 
 $transformer = new CSVTransformer();
-$transformer->onlyColumns(1,3,5)
+$transformer->onlyColumns(0,2,4)
             ->columnsToNames([
-              1 => "title",
-              3 => "something-relevant",
-              5 => "user-ratings"
+              0 => "title",
+              2 => "something-relevant",
+              4 => "user-ratings"
             ])
-            ->mapColumn(5, function($value){
+            ->mapColumn(4, function($value){
               return array_sum(array_map(str_split('-', $value), 'intval'));
             });
   
@@ -97,13 +97,13 @@ $enumerator = new FileEnumerators\Enumerator(
   new CSVReader(
     CSVReader::COMMA_DELIMITED,
     (new CSVTransformer)
-      ->onlyColumns(1,3,5)
+      ->onlyColumns(0,2,4)
       ->columnsToNames([
-        1 => "Title",
-        3 => "Something relevant",
-        5 => "User ratings"
+        0 => "Title",
+        2 => "Something relevant",
+        4 => "User ratings"
       ])
-      ->mapColumn(5, function($value){
+      ->mapColumn(4, function($value){
         return array_sum(array_map(str_split('-', $value), 'intval'));
       })
   )

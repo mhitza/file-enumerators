@@ -29,7 +29,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
   public function testTransformerOnlyColumnsOne() {
     $transformer = new CSVTransformer;
-    $transformer->onlyColumns(1);
+    $transformer->onlyColumns(0);
     
     $enumerator = new Enumerator(
       self::SAMPLE_FILEPATH,
@@ -45,9 +45,9 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     }
     
     $expected = [
-      [1 => "Lorem"],
-      [1 => "sit"],
-      [1 => "adipiscing"]
+      ["Lorem"],
+      ["sit"],
+      ["adipiscing"]
     ];
     
     $this->assertEquals(
@@ -60,7 +60,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
   public function testTransformerOnlyColumnsTwo() {
     $transformer = new CSVTransformer;
-    $transformer->onlyColumns(1,3);
+    $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
       self::SAMPLE_FILEPATH,
@@ -76,9 +76,9 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     }
     
     $expected = [
-      [1 => "Lorem", 3 => "dolor"],
-      [1 => "sit", 3 => "consectetur"],
-      [1 => "adipiscing", 3 => "Donec"]
+      [0 => "Lorem", 2 => "dolor"],
+      [0 => "sit", 2 => "consectetur"],
+      [0 => "adipiscing", 2 => "Donec"]
     ];
     
     $this->assertEquals(
@@ -93,9 +93,9 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   public function testTransformerColumnsToNames() {
     $transformer = new CSVTransformer;
     $transformer->columnsToNames([
-      1 => "First",
-      2 => "Second",
-      3 => "Third"
+      0 => "First",
+      1 => "Second",
+      2 => "Third"
     ]);
     
     $enumerator = new Enumerator(
@@ -128,7 +128,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
   public function testTransformerMapColumn() {
     $transformer = new CSVTransformer;
-    $transformer->mapColumn(1, function() { return 1; });
+    $transformer->mapColumn(0, function() { return 1; });
     
     $enumerator = new Enumerator(
       self::SAMPLE_FILEPATH,
@@ -144,9 +144,9 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     }
     
     $expected = [
-      [1 => 1, "ipsum", "dolor"],
-      [1 => 1, "amet", "consectetur"],
-      [1 => 1, "elit", "Donec"]
+      [1, "ipsum", "dolor"],
+      [1, "amet", "consectetur"],
+      [1, "elit", "Donec"]
     ];
     
     $this->assertEquals(
@@ -159,13 +159,13 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
   public function testTransformerAll() {
     $transformer = new CSVTransformer;
-    $transformer->mapColumn(1, function() { return 1; });
+    $transformer->mapColumn(0, function() { return 1; });
     $transformer->columnsToNames([
-      1 => "First",
-      2 => "Second",
-      3 => "Third"
+      0 => "First",
+      1 => "Second",
+      2 => "Third"
     ]);
-    $transformer->onlyColumns(1,3);
+    $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
       self::SAMPLE_FILEPATH,
