@@ -4,10 +4,10 @@ namespace FileEnumerators;
 
 class Enumerator {
   
-  /** @var FileEnumerators\Reader\FileReaderInterface */
+  /** @var FileEnumerators\Reader\ReaderInterface */
   protected $reader;
   
-  public function __construct($filepath, Reader\FileReaderInterface $reader) {
+  public function __construct($filepath, Reader\ReaderInterface $reader) {
     $this->filepath = $filepath;
     $this->reader = $reader;
   }
