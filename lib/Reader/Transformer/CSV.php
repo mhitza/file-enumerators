@@ -2,7 +2,7 @@
 
 namespace FileEnumerators\Reader\Transformer;
 
-class CSV {
+class CSV implements TransformerInterface {
   
   protected $only_columns = [];
   protected $columns_to_names = [];
@@ -66,17 +66,17 @@ class CSV {
    * Called internally by the Reader\CSV for each row, but can also be invoked
    * manually outside the processing pipeline.
    *
-   * @param array $row
+   * @param array $value
    * @return array
    */
-  public function apply(array $row) {
+  public function apply($value) {
     $resultant = [];
     
     $has_columns_filter = !empty($this->only_columns);
     $has_column_mappings = !empty($this->column_maps);
     $has_column_names = !empty($this->columns_to_names);
     
-    foreach($row as $id => $value) {
+    foreach($value as $id => $value) {
       if($has_columns_filter && !in_array($id, $this->only_columns)) {
         continue;
       }
