@@ -2,6 +2,7 @@
 
 use FileEnumerators\Enumerator as Enumerator;
 use FileEnumerators\Reader\Line as LineReader;
+use FileEnumerators\Reader\Transformer\FunctionMap as FunctionMapTransformer;
 
 
 class LineReaderTest extends PHPUnit_Framework_TestCase {
@@ -38,6 +39,35 @@ class LineReaderTest extends PHPUnit_Framework_TestCase {
       $collector1,
       $collector2,
       "Running twice over the source should yield same values"
+    );
+  }
+  
+  
+  public function testFunctionMap() {
+    $enumerator = new Enumerator(
+      self::SAMPLE_FILEPATH,
+      new LineReader(
+        new FunctionMapTransformer(function($value) {
+          return preg_split('/-/', trim($value));
+        })
+      )
+    );
+    
+    $collector = [];
+    foreach($enumerator->enumerate() as $values) {
+      $collector[] = $values;
+    }
+    
+    $expected = [
+      ["lorem"],
+      ["ipsum"],
+      ["dolor", "sit"]
+    ];
+    
+    $this->assertEquals(
+      $expected,
+      $collector,
+      "Last value should be an array with two elements"
     );
   }
 }
