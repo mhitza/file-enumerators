@@ -11,12 +11,6 @@ class FunctionMap implements TransformerInterface {
    * @throws \InvalidArgumentException
    */
   public function __construct(callable $callback) {
-    if(is_null($callback)) {
-      throw new \InvalidArgumentException(
-        "FunctionMap callback can not be null"
-      );
-    }
-    
     $this->callback = $callback;
   }
   
