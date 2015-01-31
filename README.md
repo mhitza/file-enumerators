@@ -1,5 +1,7 @@
 # File Enumerators
 [![Build Status](https://travis-ci.org/mhitza/file-enumerators.svg?branch=master)](https://travis-ci.org/mhitza/file-enumerators)
+[![Code Climate](https://codeclimate.com/github/mhitza/file-enumerators/badges/gpa.svg)](https://codeclimate.com/github/mhitza/file-enumerators)
+[![Test Coverage](https://codeclimate.com/github/mhitza/file-enumerators/badges/coverage.svg)](https://codeclimate.com/github/mhitza/file-enumerators)
 
 File streaming library (via generators), for line by line readers and CSV parsing (other specializations may come up at some point).
 
