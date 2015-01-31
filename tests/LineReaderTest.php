@@ -7,23 +7,25 @@ use FileEnumerators\Reader\Transformer\FunctionMap as FunctionMapTransformer;
 
 class LineReaderTest extends PHPUnit_Framework_TestCase {
   
-  protected $SAMPLE_FILEPATH = __DIR__.'/data/line_sample.txt';
-  
+  protected function sample() {
+    return __DIR__.'/data/line_sample.txt';
+  }
+
   public function testAgainstFileGetContents() {
-    $enumerator = new Enumerator($this->SAMPLE_FILEPATH, new LineReader);
+    $enumerator = new Enumerator($this->sample(), new LineReader);
     
     $collector = "";
     foreach($enumerator->enumerate() as $line) {
       $collector .= $line;
     }
     
-    $expected = file_get_contents($this->SAMPLE_FILEPATH);
+    $expected = file_get_contents($this->sample());
     $this->assertEquals($expected, $collector);
   }
   
   
   public function testReiteration() {
-    $enumerator = new Enumerator($this->SAMPLE_FILEPATH, new LineReader);
+    $enumerator = new Enumerator($this->sample(), new LineReader);
     
     $collector1 = "";
     foreach($enumerator->enumerate() as $line) {
@@ -45,7 +47,7 @@ class LineReaderTest extends PHPUnit_Framework_TestCase {
   
   public function testFunctionMap() {
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new LineReader(
         new FunctionMapTransformer(function($value) {
           return preg_split('/-/', trim($value));

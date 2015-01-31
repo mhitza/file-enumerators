@@ -7,10 +7,12 @@ use FileEnumerators\Reader\Transformer\CSV as CSVTransformer;
 
 class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
-  protected $SAMPLE_FILEPATH = __DIR__.'/data/csv_sample_simple.txt';
-  
+  protected function sample() {
+    return __DIR__.'/data/csv_sample_simple.txt';
+  }
+
   public function testAgainstFgetcsv() {
-    $enumerator = new Enumerator($this->SAMPLE_FILEPATH, new CSVReader);
+    $enumerator = new Enumerator($this->sample(), new CSVReader);
     
     $rows = [];
     foreach($enumerator->enumerate() as $row) {
@@ -32,7 +34,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0);
     
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -63,7 +65,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -99,7 +101,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     ]);
     
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -131,7 +133,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->mapColumn(0, function() { return 1; });
     
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -168,7 +170,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
-      $this->SAMPLE_FILEPATH,
+      $this->sample(),
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -195,7 +197,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   }
   
   protected function readCSV() {
-    $handle = fopen($this->SAMPLE_FILEPATH, 'r');
+    $handle = fopen($this->sample(), 'r');
     $rows_expected = [];
     while(false !== ($row = fgetcsv($handle))) {
       $rows_expected[] = $row;
