@@ -1,0 +1,5 @@
+<phpunit backupGlobals="true" bootstrap="./vendor/autoload.php">
+  <testsuite>
+    <directory>./tests</directory>
+  </testsuite>
+</phpunit>
