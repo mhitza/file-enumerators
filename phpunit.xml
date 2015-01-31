@@ -2,4 +2,10 @@
   <testsuite>
     <directory>./tests</directory>
   </testsuite>
+  <filter>
+    <blacklist>
+      <file>./lib/Reader/ReaderInterface.php</file>
+      <file>./lib/Reader/Transformer/TransformerInterface.php</file>
+    </blacklist>
+  </filter>
 </phpunit>
