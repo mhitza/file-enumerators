@@ -7,10 +7,10 @@ use FileEnumerators\Reader\Transformer\CSV as CSVTransformer;
 
 class CSVReaderTest extends PHPUnit_Framework_TestCase {
   
-  const SAMPLE_FILEPATH = __DIR__.'/data/csv_sample_simple.txt';
+  protected $SAMPLE_FILEPATH = __DIR__.'/data/csv_sample_simple.txt';
   
   public function testAgainstFgetcsv() {
-    $enumerator = new Enumerator(self::SAMPLE_FILEPATH, new CSVReader);
+    $enumerator = new Enumerator($this->SAMPLE_FILEPATH, new CSVReader);
     
     $rows = [];
     foreach($enumerator->enumerate() as $row) {
@@ -32,7 +32,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0);
     
     $enumerator = new Enumerator(
-      self::SAMPLE_FILEPATH,
+      $this->SAMPLE_FILEPATH,
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -63,7 +63,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
-      self::SAMPLE_FILEPATH,
+      $this->SAMPLE_FILEPATH,
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -99,7 +99,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     ]);
     
     $enumerator = new Enumerator(
-      self::SAMPLE_FILEPATH,
+      $this->SAMPLE_FILEPATH,
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -131,7 +131,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->mapColumn(0, function() { return 1; });
     
     $enumerator = new Enumerator(
-      self::SAMPLE_FILEPATH,
+      $this->SAMPLE_FILEPATH,
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -168,7 +168,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
     $transformer->onlyColumns(0,2);
     
     $enumerator = new Enumerator(
-      self::SAMPLE_FILEPATH,
+      $this->SAMPLE_FILEPATH,
       new CSVReader(
         CSVReader::COMMA_DELIMITED,
         $transformer
@@ -195,7 +195,7 @@ class CSVReaderTest extends PHPUnit_Framework_TestCase {
   }
   
   protected function readCSV() {
-    $handle = fopen(self::SAMPLE_FILEPATH, 'r');
+    $handle = fopen($this->SAMPLE_FILEPATH, 'r');
     $rows_expected = [];
     while(false !== ($row = fgetcsv($handle))) {
       $rows_expected[] = $row;
