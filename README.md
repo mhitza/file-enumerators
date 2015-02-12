@@ -73,7 +73,7 @@ $transformer->onlyColumns(0,2,4)
               4 => "user-ratings"
             ])
             ->mapColumn(4, function($value){
-              return array_sum(array_map(str_split('-', $value), 'intval'));
+              return array_sum(array_map('intval', str_split('-', $value)));
             });
   
 $reader = new CSVReader(
@@ -81,7 +81,7 @@ $reader = new CSVReader(
   $transformer
 );
 
-$enumerator = new FileEnumerators\Enumerator('datafile.csv', $transformer);
+$enumerator = new FileEnumerators\Enumerator('datafile.csv', $reader);
 
 foreach($enumerator->enumerate() as $row) {
   printf("%s %s %d",
