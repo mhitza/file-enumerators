@@ -16,7 +16,7 @@ class FunctionMap implements TransformerInterface {
   
   
   public function apply($value) {
-    // XXX: PHP doesn't like $this->callback($value)
+    // Note: PHP doesn't like $this->callback($value)
     $callback = $this->callback;
     return $callback($value);
   }

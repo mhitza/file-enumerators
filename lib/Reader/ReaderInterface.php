@@ -21,3 +21,4 @@ interface ReaderInterface {
   public function consume($handle);
   
 }
+

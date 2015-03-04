@@ -12,3 +12,4 @@ interface TransformerInterface {
    */
   public function apply($value);
 }
+

@@ -1,5 +1,6 @@
 {
   "name": "mhitza/file-enumerators",
+  "description": "File streaming and preprocessing library (via generators)",
   "require": {
     "php": ">=5.5.0"
   },
