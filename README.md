@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/mhitza/file-enumerators.svg?branch=master)](https://travis-ci.org/mhitza/file-enumerators)
 [![Code Climate](https://codeclimate.com/github/mhitza/file-enumerators/badges/gpa.svg)](https://codeclimate.com/github/mhitza/file-enumerators)
 [![Test Coverage](https://codeclimate.com/github/mhitza/file-enumerators/badges/coverage.svg)](https://codeclimate.com/github/mhitza/file-enumerators)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/804e520a-3745-4a5e-8836-17ccbeaa94d3/mini.png)](https://insight.sensiolabs.com/projects/804e520a-3745-4a5e-8836-17ccbeaa94d3)
 
 File streaming library (via generators), for line by line readers and CSV parsing (other specializations may come up at some point).
 
