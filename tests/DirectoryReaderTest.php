@@ -35,3 +35,4 @@ class DirectoryReaderTest extends PHPUnit_Framework_TestCase {
     foreach($enumerator->enumerate() as $inode) {}
   }
 }
+
