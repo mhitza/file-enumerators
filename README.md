@@ -126,3 +126,19 @@ foreach($enumerator->enumerate() as $row) {
   );
 }
 ```
+
+### Directory listing
+
+A very small wrapper around DirectoryIterator to list files in a given directory (ignores directories and dot files)
+```php
+<?php
+
+use FileEnumerators\Reader\Directory as DirectoryReader;
+
+$enumerator = new FileEnumerators\Enumerator(new DirectoryReader('.'));
+
+# @var $file \DirectoryIterator
+foreach($enumerator->enumerate() as $file) {
+  echo $file->getFilename();
+}
+```
