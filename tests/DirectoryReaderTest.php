@@ -24,4 +24,14 @@ class DirectoryReaderTest extends PHPUnit_Framework_TestCase {
       'Should list first level of contents of tests/data/'
     );
   }
+  
+  /**
+   * @expectedException InvalidArgumentException
+   */
+  public function testDirectoryValidation() {
+    $target_file = __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'line_sample.txt';
+    $enumerator = new Enumerator($target_file, new DirectoryReader);
+    
+    foreach($enumerator->enumerate() as $inode) {}
+  }
 }
