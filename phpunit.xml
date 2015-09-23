@@ -6,6 +6,7 @@
     <blacklist>
       <file>./lib/Reader/ReaderInterface.php</file>
       <file>./lib/Reader/Transformer/TransformerInterface.php</file>
+      <directory>./vendor</directory>
     </blacklist>
   </filter>
 </phpunit>
