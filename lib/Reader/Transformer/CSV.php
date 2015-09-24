@@ -8,6 +8,8 @@ class CSV implements TransformerInterface {
   protected $columns_to_names = [];
   protected $column_maps = [];
   
+  /** @var TransformerInterface */
+  protected $chain = null;
   
   /**
    * Comma separated numbers for columns to return, e.g.:
@@ -90,7 +92,15 @@ class CSV implements TransformerInterface {
         $value;
     }
     
-    return $resultant;
+    return false === is_null($this->chain) ?
+      $this->chain->apply($resultant) :
+      $resultant;
+  }
+  
+  
+  public function chain(TransformerInterface $transformer) {
+    $this->chain = $transformer;
+    return $this;
   }
 }
 
